@@ -68,7 +68,7 @@ function ife_help($path, $arg) {
       return $output;
 
     case 'admin/config/ife':
-      return '<p>' . t('This page provides the interface for adding new forms to use inline errors. Just add the form_id of the forms you wish to alter. The default settings can be overridden on a per form basis.') . '</p>';
+      return '<p>' . t('This page provides the interface for adding new forms to use inline errors. Just add the form_id of the forms you wish to alter. An * can be used as a wildcard. The default settings can be overridden on a per form basis.') . '</p>';
   }
 }
 
@@ -78,12 +78,38 @@ function ife_help($path, $arg) {
 function ife_form_id_load($form_id) {
   $form_ids = ife_load_form_ids();
 
-  if (array_key_exists($form_id, $form_ids)) {
-    return $form_ids[$form_id];
+  foreach((array) $form_ids as $form_id_pattern => $form_settings) {
+    if (ife_match_form_id($form_id, $form_id_pattern)) {
+      return $form_settings;
+    }
   }
-  else {
-    return FALSE;
-  }
+
+  return FALSE;
+}
+
+/**
+ * Check if a form ID pattern matches a given form ID.
+ *
+ * @param string $form_id
+ *   The form ID to compare the pattern to.
+ * @param string $form_id_pattern
+ *   A form ID pattern. Ex. webform_*.
+ *
+ * @return boolean
+ *   TRUE if the pattern matches the form_id, FALSE otherwise.
+ */
+function ife_match_form_id($form_id, $form_id_pattern) {
+  // Convert form_id_pattern to a regular expression: replace /* with asterisks.
+  $to_replace = array('/\\\\\*/');
+  $replacements = array('.*');
+
+  // Quote regular expression characters.
+  $form_id_pattern_quoted = preg_quote($form_id_pattern, '/');
+
+  // Create regular expression.
+  $form_id_pattern_regex = '/^(' . preg_replace($to_replace, $replacements, $form_id_pattern_quoted) . ')$/';
+
+  return (bool) preg_match($form_id_pattern_regex, $form_id);
 }
 
 /**

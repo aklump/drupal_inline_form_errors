@@ -121,7 +121,7 @@ function ife_settings_form_validate($form, &$form_state) {
   }
 
   //check if the form_id is valid
-  if (!preg_match('/^[a-z0-9_]*$/', $new_form_id)) {
+  if (!preg_match('/^[a-z0-9_*]*$/', $new_form_id)) {
     form_set_error('form_ids][new_form_id][form_id', t('The form_id %form_id is invalid.', array('%form_id' => $new_form_id)));
   }
 }
