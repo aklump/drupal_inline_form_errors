@@ -225,24 +225,26 @@ function ife_element_errors_set($element, $display) {
   }
 
   // Check for errors and settings
-  if ($error_message = form_get_error($element)) {
+  $errors = form_get_errors();
+  $element_id = implode('][', $element['#parents']);
+  if (!empty($errors[$element_id])) {
+    $error_message = $errors[$element_id];
+
     // Get error id
-    if (isset($_SESSION['messages']['error']) && is_array($_SESSION['messages']['error'])) {
-      $error_id = array_search($error_message, $_SESSION['messages']['error']);
+    $error_id = array_search($error_message, $_SESSION['messages']['error']);
 
-      if ($error_id !== FALSE) {
-        if (isset($display) && $display != 0) {
-          unset($_SESSION['messages']['error'][$error_id]);
-          $_SESSION['messages']['error'] = array_values($_SESSION['messages']['error']);
-        }
-
-        if (count($_SESSION['messages']['error']) <= 0) {
-          unset($_SESSION['messages']['error']);
-        }
-
-        // Set error message in session, so it can be used in our theming.
-        ife_errors('set', $element['#id'], $error_message);
+    if ($error_id !== FALSE) {
+      if (isset($display) && $display != 0) {
+        unset($_SESSION['messages']['error'][$error_id]);
+        $_SESSION['messages']['error'] = array_values($_SESSION['messages']['error']);
       }
+
+      if (count($_SESSION['messages']['error']) <= 0) {
+        unset($_SESSION['messages']['error']);
+      }
+
+      // Set error message in session, so it can be used in our theming.
+      ife_errors('set', $element['#id'], $error_message);
     }
   }
 }
