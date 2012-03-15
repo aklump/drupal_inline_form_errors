@@ -2,6 +2,7 @@ name = "Inline Form Errors"
 description = "Put form error messages inline with the form elements"
 package = User interface
 core = 7.x
+configure = admin/config/user-interface/ife
 
 files[] = ife.install
 files[] = ife.module
