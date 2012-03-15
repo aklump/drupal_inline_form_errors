@@ -67,7 +67,7 @@ function ife_help($path, $arg) {
 
       return $output;
 
-    case 'admin/config/ife':
+    case 'admin/config/user-interface/ife':
       return '<p>' . t('This page provides the interface for adding new forms to use inline errors. Just add the form_id of the forms you wish to alter. An * can be used as a wildcard. The default settings can be overridden on a per form basis.') . '</p>';
   }
 }

@@ -25,7 +25,7 @@ function theme_ife_settings_form_ids($variables) {
     $row[] = drupal_render($form[$key]['status']);
     $row[] = drupal_render($form[$key]['display']);
     $row[] = drupal_render($form[$key]['field_types']);
-    $row[] = l(t('Remove'), 'admin/config/ife/' . $key . '/delete');
+    $row[] = l(t('Remove'), 'admin/config/user-interface/ife/' . $key . '/delete');
     $rows[] = $row;
   }
 

@@ -172,7 +172,7 @@ function ife_form_id_delete_form($form, $form_state, $form_id) {
   return confirm_form(
     $form,
     t('Are your sure you want to delete the form %form_id', array('%form_id' => $form_id->form_id)),
-    'admin/config/ife',
+    'admin/config/user-interface/ife',
     t('This action cannot be undone.'),
     t('Delete'));
 }
@@ -190,5 +190,5 @@ function ife_form_id_delete_form_submit($form, &$form_state) {
   drupal_set_message(t('The form %form_id has been deleted.', array('%form_id' => $form_id)));
 
   cache_clear_all('ife_form_ids', 'cache');
-  drupal_goto('admin/config/ife');
+  drupal_goto('admin/config/user-interface/ife');
 }
