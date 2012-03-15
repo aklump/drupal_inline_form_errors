@@ -188,6 +188,11 @@ function ife_form_alter(&$form, $form_state, $form_id) {
     $form['#validate'][] = 'ife_form_validator';
   }
 
+  // webform support
+  if ($ife_options && substr($form_id, 0, 19  ) == 'webform_client_form') {
+    ife_webform_recurse($form['submitted']);
+  }
+
   //print form_ids
   if (variable_get('ife_show_form_ids', 0)) {
     $form['ife_form_id'] = array(
@@ -195,6 +200,21 @@ function ife_form_alter(&$form, $form_state, $form_id) {
       '#weight' => -1000,
       '#access' => user_access('administer inline form errors'),
     );
+  }
+}
+
+/**
+ * Ugly function to recurse through a webform to add our theme_wrapper
+ * Curse you webform for doing it your way
+ */
+function ife_webform_recurse(&$form) {
+  foreach (element_children($form) as $key) {
+    if (isset($form[$key], $form[$key]['#theme_wrappers']) && in_array('webform_element', $form[$key]['#theme_wrappers'])) {
+      $form[$key]['#theme_wrappers'][] = 'ife_form_element';
+    }
+    else {
+      ife_webform_recurse($form[$key]);
+    }
   }
 }
 
