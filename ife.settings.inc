@@ -113,9 +113,9 @@ function ife_settings_form($form, $form_state) {
  */
 function ife_settings_form_validate($form, &$form_state) {
   $values = $form_state['values'];
+  $new_form_id = trim($values['form_ids']['new_form_id']['form_id']);
 
   //check if form_id already exists
-  $new_form_id = $values['form_ids']['new_form_id']['form_id'];
   if ($new_form_id && ife_form_id_load($new_form_id)) {
     form_set_error('form_ids][new_form_id][form_id', t('The form %form_id has already been added.', array('%form_id' => $new_form_id)));
   }
@@ -150,6 +150,7 @@ function ife_settings_form_submit($form, &$form_state) {
 
   //create new form_id
   if ($values['form_ids']['new_form_id']['form_id']) {
+    $values['form_ids']['new_form_id']['form_id'] = trim($values['form_ids']['new_form_id']['form_id']);
     drupal_write_record('ife', $values['form_ids']['new_form_id']);
     drupal_set_message(t('The form %form_id has been added.', array('%form_id' => $values['form_ids']['new_form_id']['form_id'])));
   }
