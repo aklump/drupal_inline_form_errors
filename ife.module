@@ -14,7 +14,7 @@
 function ife_menu() {
   $items = array();
 
-  $items['admin/config/ife'] = array(
+  $items['admin/config/user-interface/ife'] = array(
     'title' => 'Inline Form Errors',
     'description' => 'Administer which forms to use with field messages.',
     'page callback' => 'drupal_get_form',
@@ -23,7 +23,7 @@ function ife_menu() {
     'type' => MENU_NORMAL_ITEM,
     'file' => 'ife.settings.inc',
   );
-  $items['admin/config/ife/%ife_form_id/delete'] = array(
+  $items['admin/config/user-interface/ife/%ife_form_id/delete'] = array(
     'title' => 'Delete form_id',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('ife_form_id_delete_form', 3),
