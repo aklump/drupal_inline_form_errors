@@ -69,7 +69,7 @@ function ife_install() {
     'comment_form',
     'contact_mail_user',
     'contact_mail_page',
-    'user_register',
+    'user_register_form',
     'user_pass',
     'user_login',
     'user_login_block',
