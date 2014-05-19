@@ -193,7 +193,7 @@ function ife_form_alter(&$form, &$form_state, $form_id) {
     $form['#validate'][] = 'ife_form_validator';
   }
 
-  //print form_ids
+  // Print form_ids.
   if (variable_get('ife_show_form_ids', 0)) {
     $form['ife_form_id'] = array(
       '#markup' => t('Form ID: @form_id', array('@form_id' => $form_id)),
@@ -226,6 +226,11 @@ function ife_form_validator(&$form, &$form_state) {
   return TRUE;
 }
 
+/**
+ * General function to check if a form element has an error.
+ * This function will then set the error on the element to be later used
+ * by our theming function theme_ife_form_element().
+ */
 function ife_element_errors_set(&$element, $display, $carry_down = FALSE) {
   if (!isset($_SESSION['messages'])) {
     return;
