@@ -1,5 +1,10 @@
 <?php
 
+define('IFE_MESSAGE_DEFAULT', -1);
+define('IFE_MESSAGE_LEAVE', 0);
+define('IFE_MESSAGE_ALTERNATE', 1);
+define('IFE_MESSAGE_REMOVE', 2);
+
 /**
  * @file
  * Drupal hooks
@@ -166,8 +171,8 @@ function ife_load_form_ids() {
  * Helper function to determine the display settings of a form
  */
 function ife_form_id_display($form_id) {
-  if ($form_id->display == -1) {
-    $display = variable_get('ife_display', 1);
+  if ($form_id->display == IFE_MESSAGE_DEFAULT) {
+    $display = variable_get('ife_display', IFE_MESSAGE_ALTERNATE);
   }
   else {
     $display = $form_id->display;
@@ -208,7 +213,7 @@ function ife_form_validator(&$form, &$form_state) {
   if (!empty($form_errors)) {
     ife_element_errors_set($form, $form['#ife_display']);
 
-    if ($form['#ife_display'] == 1 && !$global_error_processed) {
+    if ($form['#ife_display'] == IFE_MESSAGE_ALTERNATE && !$global_error_processed) {
       $message = filter_xss_admin(variable_get('ife_general_message', 'Please correct all highlighted errors and try again.'));
       drupal_set_message($message, 'error');
 
@@ -236,7 +241,7 @@ function ife_element_errors_set(&$element, $display, $carry_down = FALSE) {
     $error_id = array_search($error_message, $_SESSION['messages']['error']);
 
     if ($error_id !== FALSE) {
-      if (isset($display) && $display != 0) {
+      if (isset($display) && $display != IFE_MESSAGE_LEAVE) {
         unset($_SESSION['messages']['error'][$error_id]);
         $_SESSION['messages']['error'] = array_values($_SESSION['messages']['error']);
       }

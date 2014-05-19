@@ -37,7 +37,7 @@ function ife_settings_form($form, $form_state) {
       t('Show an alternate error message (a general error message of your choice)'),
       t('Remove all messages (Show nothing)'),
     ),
-    '#default_value' => variable_get('ife_display', 1),
+    '#default_value' => variable_get('ife_display', IFE_MESSAGE_ALTERNATE),
   );
   $form['general_settings']['ife_general_message'] = array(
     '#type' => 'textarea',
@@ -70,9 +70,7 @@ function ife_settings_form($form, $form_state) {
     );
     $form['form_ids'][$form_id->form_id]['display'] = array(
       '#type' => 'select',
-      '#options' => array(
-        '-1' => t('<default>'), t('Leave the messages in place'), t('Show an alternate error message'), t('Remove all messages'),
-      ),
+      '#options' => ife_message_display_options(),
       '#default_value' => $form_id->display,
     );
   }
@@ -89,10 +87,8 @@ function ife_settings_form($form, $form_state) {
   $form['form_ids']['new_form_id']['field_types'] = array('#value' => t('All fields will be converted'));
   $form['form_ids']['new_form_id']['display'] = array(
     '#type' => 'select',
-    '#options' => array(
-      '-1' => t('<default>'), t('Leave the messages in place'), t('Show an alternate error messages'), t('Remove all message'),
-    ),
-    '#default_value' => -1,
+    '#options' => ife_message_display_options(),
+    '#default_value' => IFE_MESSAGE_DEFAULT,
   );
 
   //submit button
@@ -102,6 +98,18 @@ function ife_settings_form($form, $form_state) {
   );
 
   return $form;
+}
+
+/**
+ * Returns a list of display option for error messages
+ */
+function ife_message_display_options() {
+  return array(
+    IFE_MESSAGE_DEFAULT => t('Default'),
+    IFE_MESSAGE_LEAVE => t('Leave the messages in place'),
+    IFE_MESSAGE_ALTERNATE => t('Show an alternate error messages'),
+    IFE_MESSAGE_REMOVE => t('Remove all message'),
+  );
 }
 
 /**
