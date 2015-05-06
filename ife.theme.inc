@@ -43,7 +43,7 @@ function theme_ife_settings_form_ids($variables) {
 }
 
 /**
- * Theme the form element, add the error, when one occured.
+ * Theme the form element, add the error, when one occurred.
  */
 function theme_ife_form_element($variables) {
   $output = $variables['element']['#children'];
