@@ -8,8 +8,6 @@ define('IFE_MESSAGE_REMOVE', 2);
 /**
  * @file
  * Drupal hooks
- *
- * @author Stijn De Meyere
  */
 
 

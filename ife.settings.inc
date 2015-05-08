@@ -3,8 +3,6 @@
 /**
  * @file
  * Admin settings pages
- *
- * @author Stijn De Meyere
  */
 
 /**

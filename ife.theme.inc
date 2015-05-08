@@ -3,8 +3,6 @@
 /**
  * @file
  * Theme functions
- *
- * @author Stijn De Meyere
  */
 
 /**
