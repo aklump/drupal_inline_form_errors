@@ -1,15 +1,14 @@
 <?php
 
-define('IFE_MESSAGE_DEFAULT', -1);
-define('IFE_MESSAGE_LEAVE', 0);
-define('IFE_MESSAGE_ALTERNATE', 1);
-define('IFE_MESSAGE_REMOVE', 2);
-
 /**
  * @file
  * Drupal hooks
  */
 
+define('IFE_MESSAGE_DEFAULT', -1);
+define('IFE_MESSAGE_LEAVE', 0);
+define('IFE_MESSAGE_ALTERNATE', 1);
+define('IFE_MESSAGE_REMOVE', 2);
 
 /**
  * Implements hook_menu().
