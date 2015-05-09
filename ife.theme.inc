@@ -2,11 +2,11 @@
 
 /**
  * @file
- * Theme functions
+ * Theme functions.
  */
 
 /**
- * Theming function for the admin settings page
+ * Theming function for the admin settings page.
  */
 function theme_ife_settings_form_ids($variables) {
   $form = $variables['form'];
@@ -16,18 +16,18 @@ function theme_ife_settings_form_ids($variables) {
   $keys = element_children($form);
   array_pop($keys);
 
-  //existing form_ids
+  // Add existing forms to table as rows.
   foreach ($keys as $key) {
-    $row = array();
-    $row[] = drupal_render($form[$key]['form_id']);
-    $row[] = drupal_render($form[$key]['status']);
-    $row[] = drupal_render($form[$key]['display']);
-    $row[] = drupal_render($form[$key]['field_types']);
-    $row[] = l(t('Remove'), 'admin/config/user-interface/ife/' . $key . '/delete');
-    $rows[] = $row;
+    $rows[] = array(
+      drupal_render($form[$key]['form_id']),
+      drupal_render($form[$key]['status']),
+      drupal_render($form[$key]['display']),
+      drupal_render($form[$key]['field_types']),
+      l(t('Remove'), 'admin/config/user-interface/ife/' . $key . '/delete'),
+    );
   }
 
-  //new form_id
+  // Add adding form to table as a row.
   $rows[] = array(
     drupal_render($form['new_form_id']['form_id']),
     drupal_render($form['new_form_id']['status']),
@@ -54,7 +54,7 @@ function theme_ife_form_element($variables) {
     $error = '<div class="messages error messages-inline">' . $variables['element']['#ife_error'] . '</div>';
 
     if (isset($variables['element']['#ife_error_position']) && $variables['element']['#ife_error_position'] == IFE_POSITION_INLINE_MESSAGE_BEFORE) {
-       $output = $error . $element;
+      $output = $error . $element;
     }
     else {
       $output = $element . $error;

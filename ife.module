@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Drupal hooks
+ * Drupal hooks.
  */
 
 define('IFE_MESSAGE_DEFAULT', -1);
@@ -46,7 +46,7 @@ function ife_permission() {
   return array(
     'administer inline form errors' => array(
       'title' => t('administer inline form errors'),
-      'description' => t('TODO Add a description for \'administer inline form errors\''),
+      'description' => t('TODO Add a description for "administer inline form errors"'),
     ),
   );
 }
@@ -99,7 +99,7 @@ function ife_form_id_load($form_id, $reset = FALSE) {
  * @param string $form_id_pattern
  *   A form ID pattern. Ex. webform_*.
  *
- * @return boolean
+ * @return bool
  *   TRUE if the pattern matches the form_id, FALSE otherwise.
  */
 function ife_match_form_id($form_id, $form_id_pattern) {
@@ -273,7 +273,7 @@ function ife_commerce_checkout_pane_info_alter(&$panes) {
   foreach ((array) $panes as $key => $pane) {
     if (!isset($panes[$key]['callbacks'])) {
       $panes[$key]['callbacks'] = array(
-          'checkout_form_validate' => 'ife_form_validator',
+        'checkout_form_validate' => 'ife_form_validator',
       );
     }
   }

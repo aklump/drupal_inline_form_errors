@@ -1,4 +1,8 @@
 <?php
+/**
+ * @file
+ * Set variables for translation.
+ */
 
 /**
  * Implements hook_variable_info().

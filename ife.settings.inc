@@ -2,16 +2,16 @@
 
 /**
  * @file
- * Admin settings pages
+ * Admin settings pages.
  */
 
 /**
- * IFE settings form
+ * IFE settings form.
  */
 function ife_settings_form($form, $form_state) {
   $form = array();
 
-  //general options
+  // General options.
   $form['general_settings'] = array(
     '#type' => 'fieldset',
     '#title' => t('General options'),
@@ -57,8 +57,7 @@ function ife_settings_form($form, $form_state) {
     '#required' => TRUE,
   );
 
-
-  //the form id's
+  // The form_id's.
   $form['form_ids'] = array(
     '#type' => 'fieldset',
     '#title' => t('Form conversion'),
@@ -112,7 +111,7 @@ function ife_settings_form($form, $form_state) {
 }
 
 /**
- * Returns a list of display option for error messages
+ * Returns a list of display option for error messages.
  */
 function ife_message_display_options() {
   return array(
@@ -124,7 +123,7 @@ function ife_message_display_options() {
 }
 
 /**
- * IFE settings form validations
+ * IFE settings form validations.
  */
 function ife_settings_form_validate($form, &$form_state) {
   $values = $form_state['values'];
@@ -142,18 +141,18 @@ function ife_settings_form_validate($form, &$form_state) {
 }
 
 /**
- * IFE settings form submit
+ * IFE settings form submit.
  */
 function ife_settings_form_submit($form, &$form_state) {
   $values = $form_state['values'];
 
-  //set general options
+  // Set general options.
   variable_set('ife_show_form_ids', $values['ife_show_form_ids']);
   variable_set('ife_display', $values['ife_display']);
   variable_set('ife_position_inline_message', $values['ife_position_inline_message']);
   variable_set('ife_general_message', $values['ife_general_message']);
 
-  //write form_ids to the database
+  // Write form_ids to the database.
   $form_ids = $values['form_ids'];
   array_pop($form_ids);
 
@@ -164,7 +163,7 @@ function ife_settings_form_submit($form, &$form_state) {
     drupal_write_record('ife', $object, array('form_id'));
   }
 
-  //create new form_id
+  // Create new form_id.
   if ($values['form_ids']['new_form_id']['form_id']) {
     $values['form_ids']['new_form_id']['form_id'] = trim($values['form_ids']['new_form_id']['form_id']);
     drupal_write_record('ife', $values['form_ids']['new_form_id']);
@@ -176,7 +175,7 @@ function ife_settings_form_submit($form, &$form_state) {
 }
 
 /**
- * Confirm delete form for IFE form_ids
+ * Confirm delete form for IFE form_ids.
  */
 function ife_form_id_delete_form($form, $form_state, $form_id) {
   $form = array();
@@ -194,15 +193,15 @@ function ife_form_id_delete_form($form, $form_state, $form_id) {
 }
 
 /**
- * Submit for confirm delete form for IFE form_ids
+ * Submit for confirm delete form for IFE form_ids.
  */
 function ife_form_id_delete_form_submit($form, &$form_state) {
   $form_id = $form_state['values']['fid'];
-  // TODO Please review the conversion of this statement to the D7 database API syntax.
+  // @todo Please review the conversion of this statement to the D7 database API syntax.
   /* db_query("DELETE FROM {ife} WHERE form_id = '%s'", $form_id) */
   db_delete('ife')
-  ->condition('form_id', $form_id)
-  ->execute();
+    ->condition('form_id', $form_id)
+    ->execute();
   drupal_set_message(t('The form %form_id has been deleted.', array('%form_id' => $form_id)));
 
   ife_load_form_ids(TRUE);
