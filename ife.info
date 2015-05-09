@@ -4,6 +4,8 @@ package = User interface
 core = 7.x
 configure = admin/config/user-interface/ife
 
+dependencies[] = ctools
+
 files[] = ife.install
 files[] = ife.module
 files[] = ife.settings.inc

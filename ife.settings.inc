@@ -68,7 +68,7 @@ function ife_settings_form($form, $form_state) {
     '#theme' => 'ife_settings_form_ids',
   );
 
-  $form_ids = ife_load_form_ids();
+  $form_ids = ife_load_form_ids(TRUE);
   foreach ($form_ids as $form_id) {
     $form['form_ids'][$form_id->form_id] = array();
     $form['form_ids'][$form_id->form_id]['form_id'] = array('#markup' => $form_id->form_id);
@@ -171,7 +171,7 @@ function ife_settings_form_submit($form, &$form_state) {
   }
 
   drupal_set_message(t('The settings have been saved'));
-  cache_clear_all('ife_form_ids', 'cache');
+  ife_load_form_ids(TRUE);
 }
 
 /**
@@ -204,6 +204,6 @@ function ife_form_id_delete_form_submit($form, &$form_state) {
   ->execute();
   drupal_set_message(t('The form %form_id has been deleted.', array('%form_id' => $form_id)));
 
-  cache_clear_all('ife_form_ids', 'cache');
+  ife_load_form_ids(TRUE);
   drupal_goto('admin/config/user-interface/ife');
 }
