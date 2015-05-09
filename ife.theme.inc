@@ -44,11 +44,21 @@ function theme_ife_settings_form_ids($variables) {
  * Theme the form element, add the error, when one occurred.
  */
 function theme_ife_form_element($variables) {
-  $output = $variables['element']['#children'];
+  $output = '';
+
+  $element = $variables['element']['#children'];
 
   // Add in the error if set.
   if (isset($variables['element']['#ife_error']) && $variables['element']['#ife_error']) {
-    $output .= '<div class="messages error messages-inline">' . $variables['element']['#ife_error'] . '</div>';
+
+    $error = '<div class="messages error messages-inline">' . $variables['element']['#ife_error'] . '</div>';
+
+    if (isset($variables['element']['#ife_error_position']) && $variables['element']['#ife_error_position'] == IFE_POSITION_INLINE_MESSAGE_BEFORE) {
+       $output = $error . $element;
+    }
+    else {
+      $output = $element . $error;
+    }
   }
 
   return $output;

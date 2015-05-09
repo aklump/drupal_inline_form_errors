@@ -9,6 +9,8 @@ define('IFE_MESSAGE_DEFAULT', -1);
 define('IFE_MESSAGE_LEAVE', 0);
 define('IFE_MESSAGE_ALTERNATE', 1);
 define('IFE_MESSAGE_REMOVE', 2);
+define('IFE_POSITION_INLINE_MESSAGE_BEFORE', 0);
+define('IFE_POSITION_INLINE_MESSAGE_AFTER', 1);
 
 /**
  * Implements hook_menu().
@@ -254,6 +256,9 @@ function ife_element_errors_set(&$element, $display, $carry_down = FALSE) {
 
       // Add error message to the element.
       $element['#ife_error'] = $error_message;
+
+      // Add the position for the inline error message.
+      $element['#ife_error_position'] = variable_get('ife_position_inline_message', IFE_POSITION_INLINE_MESSAGE_AFTER);
 
       // Add in our theme wrapper on the fly
       if (!isset($element['#theme_wrappers']) || !in_array('ife_form_element', $element['#theme_wrappers'])) {

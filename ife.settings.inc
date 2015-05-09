@@ -37,6 +37,18 @@ function ife_settings_form($form, $form_state) {
     ),
     '#default_value' => variable_get('ife_display', IFE_MESSAGE_ALTERNATE),
   );
+
+  $form['general_settings']['ife_position_inline_message'] = array(
+    '#type' => 'radios',
+    '#title' => t('Inline error message position'),
+    '#description' => t('The position of the inline error message is relative to the element.'),
+    '#default_value' => variable_get('ife_position_inline_message', IFE_POSITION_INLINE_MESSAGE_AFTER),
+    '#options' => array(
+      IFE_POSITION_INLINE_MESSAGE_BEFORE => t('Before'),
+      IFE_POSITION_INLINE_MESSAGE_AFTER => t('After'),
+    ),
+  );
+
   $form['general_settings']['ife_general_message'] = array(
     '#type' => 'textarea',
     '#title' => t('General error message'),
@@ -137,6 +149,7 @@ function ife_settings_form_submit($form, &$form_state) {
   //set general options
   variable_set('ife_show_form_ids', $values['ife_show_form_ids']);
   variable_set('ife_display', $values['ife_display']);
+  variable_set('ife_position_inline_message', $values['ife_position_inline_message']);
   variable_set('ife_general_message', $values['ife_general_message']);
 
   //write form_ids to the database
