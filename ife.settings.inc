@@ -87,6 +87,7 @@ function ife_settings_form($form, $form_state) {
 
   $form['form_ids']['new_form_id']['form_id'] = array(
     '#type' => 'textfield',
+    '#description' => t('The "*" character is a wildcard. Ex. webform_*.'),
     '#size' => 20,
   );
   $form['form_ids']['new_form_id']['status'] = array(
