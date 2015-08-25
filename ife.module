@@ -219,7 +219,7 @@ function ife_form_validator(&$form, &$form_state) {
  * by our theming function theme_ife_form_element().
  */
 function ife_element_errors_set(&$element, $display, $carry_down = FALSE) {
-  if (!isset($_SESSION['messages'])) {
+  if (!isset($_SESSION['messages']['error'])) {
     return;
   }
 
