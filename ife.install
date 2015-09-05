@@ -48,9 +48,6 @@ function ife_schema() {
 
 /**
  * Implements hook_install().
- * 
- * @todo The drupal_(un)install_schema functions are called automatically in D7.
- * drupal_install_schema('ife')
  */
 function ife_install() {
 
