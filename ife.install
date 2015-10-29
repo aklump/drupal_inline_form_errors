@@ -1,8 +1,7 @@
 <?php
-
 /**
  * @file
- * Install file
+ * Install file.
  */
 
 /**
@@ -83,7 +82,7 @@ function ife_install() {
 
 /**
  * Implements hook_uninstall().
- * 
+ *
  * @todo The drupal_(un)install_schema functions are called automatically in D7.
  * drupal_install_schema('ife')
  */

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * Admin settings pages.
@@ -101,7 +100,7 @@ function ife_settings_form($form, $form_state) {
     '#default_value' => IFE_MESSAGE_DEFAULT,
   );
 
-  //submit button
+  // Submit button.
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Save configuration'),
@@ -129,12 +128,12 @@ function ife_settings_form_validate($form, &$form_state) {
   $values = $form_state['values'];
   $new_form_id = trim($values['form_ids']['new_form_id']['form_id']);
 
-  //check if form_id already exists
+  // Check if form_id already exists.
   if ($new_form_id && ife_form_id_load($new_form_id)) {
     form_set_error('form_ids][new_form_id][form_id', t('The form %form_id has already been added.', array('%form_id' => $new_form_id)));
   }
 
-  //check if the form_id is valid
+  // Check if the form_id is valid.
   if (!preg_match('/^[a-z0-9_*]*$/', $new_form_id)) {
     form_set_error('form_ids][new_form_id][form_id', t('The form_id %form_id is invalid.', array('%form_id' => $new_form_id)));
   }
