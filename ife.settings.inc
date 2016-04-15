@@ -100,13 +100,7 @@ function ife_settings_form($form, $form_state) {
     '#default_value' => IFE_MESSAGE_DEFAULT,
   );
 
-  // Submit button.
-  $form['submit'] = array(
-    '#type' => 'submit',
-    '#value' => t('Save configuration'),
-  );
-
-  return $form;
+  return system_settings_form($form);
 }
 
 /**
@@ -144,13 +138,7 @@ function ife_settings_form_validate($form, &$form_state) {
  */
 function ife_settings_form_submit($form, &$form_state) {
   $values = $form_state['values'];
-
-  // Set general options.
-  variable_set('ife_show_form_ids', $values['ife_show_form_ids']);
-  variable_set('ife_display', $values['ife_display']);
-  variable_set('ife_position_inline_message', $values['ife_position_inline_message']);
-  variable_set('ife_general_message', $values['ife_general_message']);
-
+  
   // Write form_ids to the database.
   $form_ids = $values['form_ids'];
   array_pop($form_ids);
