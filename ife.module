@@ -237,6 +237,9 @@ function ife_element_errors_set(&$element, $display, $carry_down = FALSE) {
 
   // Check for errors and settings.
   $errors = form_get_errors();
+  if (empty($element['#parents'])) {
+    return;
+  }
   $element_id = implode('][', $element['#parents']);
   if (!empty($errors[$element_id])) {
     $error_message = $errors[$element_id];
