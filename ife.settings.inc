@@ -40,11 +40,12 @@ function ife_settings_form($form, $form_state) {
   $form['general_settings']['ife_position_inline_message'] = array(
     '#type' => 'radios',
     '#title' => t('Inline error message position'),
-    '#description' => t('The position of the inline error message is relative to the element.'),
+    '#description' => t('The position of the inline error message is relative to the element. Custom type imply that developer is responsible for the output of an error in the right place.'),
     '#default_value' => variable_get('ife_position_inline_message', IFE_POSITION_INLINE_MESSAGE_AFTER),
     '#options' => array(
       IFE_POSITION_INLINE_MESSAGE_BEFORE => t('Before'),
       IFE_POSITION_INLINE_MESSAGE_AFTER => t('After'),
+      IFE_POSITION_INLINE_MESSAGE_CUSTOM => t('Custom'),
     ),
   );
 
