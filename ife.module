@@ -46,7 +46,7 @@ function ife_permission() {
   return array(
     'administer inline form errors' => array(
       'title' => t('administer inline form errors'),
-      'description' => t('TODO Add a description for "administer inline form errors"'),
+      'description' => t('Administer global Inline Form Errors settings and individual form conversions'),
     ),
   );
 }
