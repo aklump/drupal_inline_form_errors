@@ -100,6 +100,8 @@ function ife_settings_form($form, $form_state) {
     '#default_value' => IFE_MESSAGE_DEFAULT,
   );
 
+  $form['#submit'][] = 'ife_settings_form_submit';
+
   return system_settings_form($form);
 }
 
