@@ -57,9 +57,9 @@ function ife_permission() {
 function ife_help($path, $arg) {
   switch ($path) {
     case 'admin/help#ife':
-      $output = '<p>' . t('IFE or Inline Form Errors allows you to place form submission error inline with the form elements. Three options are provided for setting your inline error behaviour. You can configure the default behaviour or override the behaviour on a per form basis. You can add as many forms as you like.') . '</p>';
+      $output = '<p>' . t('IFE or Inline Form Errors allows you to place form submission error inline with the form elements. Three options are provided for setting your inline error behavior. You can configure the default behavior or override the behavior on a per form basis. You can add as many forms as you like.') . '</p>';
 
-      $output .= '<p>' . t('IFE provides three behaviours for the configured forms') . '</p>';
+      $output .= '<p>' . t('IFE provides three behaviors for the configured forms') . '</p>';
 
       $output .= '<ul>';
       $output .= '<li>' . t('<strong>Leave the messages in place</strong>, this option will copy the error messages and place them inline. The original error messages set by Drupal will remain in place') . '</li>';
