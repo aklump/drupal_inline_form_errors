@@ -30,7 +30,7 @@ function ife_settings_form($form, $form_state) {
     '#title' => t('Default display settings'),
     '#description' => t('What do you want to do with the original messages block at the top of the page?'),
     '#options' => array(
-      t('Leave the messages in place (default Drupal behaviour)'),
+      t('Leave the messages in place (default Drupal behavior)'),
       t('Show an alternate error message (a general error message of your choice)'),
       t('Remove all messages (Show nothing)'),
     ),
