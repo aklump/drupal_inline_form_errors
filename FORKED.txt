@@ -1,0 +1,3 @@
+* Forked at 38b891d because the module did not seem to work.  I refactored how the `ife_element_errors_set()` works in relationship to the `#parents` check.  This appears to make it work correctly now with children of a form, when the form itself is sent.
+* I didn't bother with drupal.org on this.  This module doesn't appear to be well supported anymore, so making it work for our use case only.
+* 2017-10-13T13:32, aklump

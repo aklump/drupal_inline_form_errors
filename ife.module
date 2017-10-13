@@ -317,3 +317,12 @@ function ife_schema_alter(&$schema)
         ),
     );
 }
+
+/**
+ * Implements hook_update_status_alter().
+ */
+function ife_update_status_alter(&$projects) {
+    if (isset($projects['ife']['title'])) {
+        $projects['ife']['title'] .= ' FORKED!!! (see FORKED.txt)';
+    }
+}
