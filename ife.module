@@ -250,42 +250,41 @@ function ife_element_errors_set(&$element, $display, $carry_down = false)
     // Check for errors and settings.
     $errors = form_get_errors();
 
-    if (empty($element['#parents'])) {
-        return;
-    }
+    if (!empty($element['#parents'])) {
 
-    $element_id = implode('][', $element['#parents']);
-    if (!empty($errors[$element_id])) {
-        $error_message = $errors[$element_id];
+        $element_id = implode('][', $element['#parents']);
+        if (!empty($errors[$element_id])) {
+            $error_message = $errors[$element_id];
 
-        // Get error id.
-        $error_id = array_search($error_message, $_SESSION['messages']['error']);
+            // Get error id.
+            $error_id = array_search($error_message, $_SESSION['messages']['error']);
 
-        if ($error_id !== false) {
-            if (isset($display) && $display != IFE_MESSAGE_LEAVE) {
-                unset($_SESSION['messages']['error'][$error_id]);
-                $_SESSION['messages']['error'] = array_values($_SESSION['messages']['error']);
-            }
-
-            if (count($_SESSION['messages']['error']) <= 0) {
-                unset($_SESSION['messages']['error']);
-            }
-
-            // Add error message to the element.
-            $element['#ife_error'] = $error_message;
-
-            // Add the position for the inline error message.
-            $element['#ife_error_position'] = variable_get('ife_position_inline_message', IFE_POSITION_INLINE_MESSAGE_AFTER);
-
-            // Add in our theme wrapper on the fly if it's not custom placement.
-            if ($element['#ife_error_position'] != IFE_POSITION_INLINE_MESSAGE_CUSTOM) {
-                if (!isset($element['#theme_wrappers']) || !in_array('ife_form_element', $element['#theme_wrappers'])) {
-                    $element['#theme_wrappers'][] = 'ife_form_element';
+            if ($error_id !== false) {
+                if (isset($display) && $display != IFE_MESSAGE_LEAVE) {
+                    unset($_SESSION['messages']['error'][$error_id]);
+                    $_SESSION['messages']['error'] = array_values($_SESSION['messages']['error']);
                 }
-            }
 
-            // Found a matching error, no need to continue.
-            return;
+                if (count($_SESSION['messages']['error']) <= 0) {
+                    unset($_SESSION['messages']['error']);
+                }
+
+                // Add error message to the element.
+                $element['#ife_error'] = $error_message;
+
+                // Add the position for the inline error message.
+                $element['#ife_error_position'] = variable_get('ife_position_inline_message', IFE_POSITION_INLINE_MESSAGE_AFTER);
+
+                // Add in our theme wrapper on the fly if it's not custom placement.
+                if ($element['#ife_error_position'] != IFE_POSITION_INLINE_MESSAGE_CUSTOM) {
+                    if (!isset($element['#theme_wrappers']) || !in_array('ife_form_element', $element['#theme_wrappers'])) {
+                        $element['#theme_wrappers'][] = 'ife_form_element';
+                    }
+                }
+
+                // Found a matching error, no need to continue.
+                return;
+            }
         }
     }
 
