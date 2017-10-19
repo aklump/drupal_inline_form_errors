@@ -270,7 +270,7 @@ function ife_element_errors_set(&$element, $display, $carry_down = false)
                 }
 
                 // Add error message to the element.
-                $element['#ife_error'] = $error_message;
+                $element['#ife_error'] = t($error_message);
 
                 // Add the position for the inline error message.
                 $element['#ife_error_position'] = variable_get('ife_position_inline_message', IFE_POSITION_INLINE_MESSAGE_AFTER);
