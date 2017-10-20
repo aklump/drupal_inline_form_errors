@@ -2,4 +2,9 @@
 * I didn't bother with drupal.org on this.  This module doesn't appear to be well supported anymore, so making it work for our use case only.
 * 2017-10-13T13:32, aklump
 
-* I added the ability to translate the form errors using t()
+* I added the ability to translate the form errors using t()  You can do something like this in settings.php
+
+        $conf['locale_custom_strings_en']['form_user_login'] = [
+            'Username or email field is required.' => 'Please enter your username or email address.',
+        ];
+

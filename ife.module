@@ -240,12 +240,20 @@ function ife_form_validator(&$form, &$form_state)
  * General function to check if a form element has an error.
  * This function will then set the error on the element to be later used
  * by our theming function theme_ife_form_element().
+ *
+ * @param       $element
+ * @param       $display
+ * @param array $context Used internally, but you may set it if you know what you're doing.
  */
-function ife_element_errors_set(&$element, $display, $carry_down = false)
+function ife_element_errors_set(&$element, $display, $context = array())
 {
     if (!isset($_SESSION['messages']['error'])) {
         return;
     }
+
+    $context += array(
+        'form_id' => isset($element['#form_id']) ? $element['#form_id'] : null,
+    );
 
     // Check for errors and settings.
     $errors = form_get_errors();
@@ -270,7 +278,13 @@ function ife_element_errors_set(&$element, $display, $carry_down = false)
                 }
 
                 // Add error message to the element.
-                $element['#ife_error'] = t($error_message);
+
+                // TODO Get the form id in a less hacky way.
+                $error_message = t($error_message);
+                $error_message = t($error_message, array(), array(
+                    'context' => 'form_' . $context['form_id'],
+                ));
+                $element['#ife_error'] = $error_message;
 
                 // Add the position for the inline error message.
                 $element['#ife_error_position'] = variable_get('ife_position_inline_message', IFE_POSITION_INLINE_MESSAGE_AFTER);
@@ -291,7 +305,7 @@ function ife_element_errors_set(&$element, $display, $carry_down = false)
     // Recurse through all children.
     foreach (element_children($element) as $key) {
         if (isset($element[$key]) && $element[$key]) {
-            ife_element_errors_set($element[$key], $display, $carry_down);
+            ife_element_errors_set($element[$key], $display, $context);
         }
     }
 }
@@ -321,7 +335,8 @@ function ife_schema_alter(&$schema)
 /**
  * Implements hook_update_status_alter().
  */
-function ife_update_status_alter(&$projects) {
+function ife_update_status_alter(&$projects)
+{
     if (isset($projects['ife']['title'])) {
         $projects['ife']['title'] .= ' FORKED!!! (see FORKED.txt)';
     }
